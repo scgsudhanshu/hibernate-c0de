@@ -1,0 +1,104 @@
+Hibernate : 
+
+1. Java framework that simplifies the java application development to interact witht he database 
+2. Simpley kahaein to hme ab database queries nhi likhni , hibernate khud hi query fire kr dega hmare liye 
+3. It is ORM tool means there is every field for every column of table of DB mapped 
+4. It is open soruce and lightweight - Based on POJOs (simple java classes)
+5. It would not forces us to implement or extend any classes : Hence non-invasive or lossely coupled 
+6. Any type of appication can be build with hibernate
+
+
+Traditional Method of JDBC : Java -> DB through JDBC and have to write many queries manually 
+
+Through Hibernate(ORM) : Mapping of object with database through Hibernate framework , we would map the class withthe table during the time of Creation of classes
+
+ORM : Automatically do the operation fo Database w by automatically executing the queries
+Backend me JDBC hi chl rha hoga 
+hma annotation k thorugh bta denge ki kis class ko kis table se map krna h 
+
+
+Session Factory : To create Sessions : Long lived - Second level cache : to create sessions with DB  
+
+Session : Short Lived - first level cache 
+dialect : Language of hibernate
+hbm2ddl.auto : to autoi create the table : create : new table creation everytime 
+update : table creation at first point and updation at other times
+show_sql : to see which query is created
+
+
+Using Annotations in Hibernate : 
+1. @Entity : Used to treat a class as table : using name to give the name manually
+2. @Table : Used to create the table : using name to give the name manually
+3. @Id : To distinguish the property uniquely . (To create the primary key)
+4. GeneratedValue : Automatically generate the sequence 
+5. Column : For column mapping nad specifying a dynamic column 
+6. Transient : Tells hibernate not to save the field
+7. Temporal : tells the date format
+8. Lob : For large datatype such as blob and clob
+9. OnetoOne : for one to one mapping with other table
+   OnetoMany : ,ManytoOne
+10. JoinColumn = to rename the foreign key 
+
+ 
+Steps to save the data : 
+1. Create an object
+2. Create an object of session
+3. Start the transaction -> then commit -> then close the session
+
+To fetch the data : use get and load functions 
+get : returns null if the data is not found on DB
+2. check the cache for the object if not found then hit the DB
+3. use if not sure about the existence of data
+
+load : throws exception Object not found
+2. return a proxy in place : just like blank object and hit the DB if other than getId method is called -> Faster 
+3. Use only if surity about the data
+
+ 
+One to One Mapping : Unidirectional , Bidirectional
+
+OneToMany , ManyToOne : use mappedBy to create the id column
+
+ManyToMany : Just like Many employees have many projects and many projects have many employees
+
+@JoinTable : Annotation for renaiming the name of table created with ManyToMany Annotation 
+
+
+konark - Search , Map 
+rajat - Drive , Search
+aditya - Map , Drive
+sudhanshu - All 3 
+
+Fetching Techniques : Lazy and Eager 
+
+Lazy : Explicitly load the data with getter and setters : Questions have many answers 
+
+Eager : Load the data on the spot e.g. Questions have many answers but when we call the object of question then answer will load automatically
+
+Hibernate / Persistence Life cycle States : 
+1. Transient State : Object created , values set , object not in Database as well as in session 
+
+2. Persistence State : On calling session.save() , object associated with session as well as data gets save in the database 
+changes made in the object will also0 reflect in the DB
+
+3. Detached : When we call session.close() then object gets dissociated from session but there in the DB and on changing the object the values will not reflect in the DB
+
+4. Removed : when we call session.delete() then value gets delete from the DB but persists in the session object   
+
+
+HQL : createQuery - Expects HQL 
+
+SQL : createSQLQuery - Expects SQL
+
+Cascading : To save the data automatically on saving the main entity , just like if a class has another class obejct as member so without cascading we have to save the inner entity manually , but for a large chunk it is very cumbersome so cascading is helpful for this , it allows us to save the inner entity also automatically on saving the main entity
+
+Caching in Hibernate : 1. Improves the performance of the Application
+2. Reduce the number of queries
+
+Hibernate stores the data in the cache on selecting the data once the data gets stored in the cache then again after selecting the data , it searches in the cache first for the object it stored in the cache , if the object found then it will not hit the DB
+
+First Level caching : by use of Session object and provided by default
+
+Second Level Caching : by use of Session Factory and we have to configure manually
+
+Criteria API : to fetch the data without using query , using methods 

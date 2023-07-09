@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping SYSTEM
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="com.hibernate.xml.Provider" table="tbl_provider">
+		<id name="providerId" column="Provider_id">
+		<generator class="native"></generator>
+		</id>
+		
+		<property name="providerName" column="provider_name" type="string" />
+		<property name="providerType" column="provider_type" type="string" />
+	</class>
+
+</hibernate-mapping>
